@@ -1,0 +1,9 @@
+# Lixee Linky Indicator Configuration
+# Format: KEY=value
+
+# Refresh interval in seconds (1-1800)
+REFRESH_SECONDS=5
+
+# Power thresholds for icon colors (in VA)
+LOW_THRESHOLD=-100
+HIGH_THRESHOLD=1

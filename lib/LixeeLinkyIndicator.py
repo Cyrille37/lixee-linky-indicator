@@ -19,13 +19,11 @@ from lib.constants import (
 )
 
 ASSETS_PATH = os.path.join(APP_FOLDER, "assets")
-ICON_PATH = os.path.join(ASSETS_PATH, "solar-panel.svg")
+ICON_PATH_DEFAULT = os.path.join(ASSETS_PATH, "solar-panel.svg")
 ICON_PATH_GREEN = os.path.join(ASSETS_PATH, "solar-panel-green.svg")
 ICON_PATH_YELLOW = os.path.join(ASSETS_PATH, "solar-panel-yellow.svg")
 ICON_PATH_RED = os.path.join(ASSETS_PATH, "solar-panel-red.svg")
 TEXT_PATTERN = "8888 VA"
-
-ip = "192.168.1.183"
 
 class LixeeLinkyIndicator:
     def __init__(self, configfile):
@@ -33,8 +31,18 @@ class LixeeLinkyIndicator:
         self.refresh_seconds = REFRESH_SECONDS
         self.low_threshold = LOW_THRESHOLD
         self.high_threshold = HIGH_THRESHOLD
+        self.lixeebox_ip = None
 
         self.read_config(configfile)
+
+        if self.lixeebox_ip is None:
+            self.popupWarning(
+                "Configuration incomplète",
+                "Le fichier de configuration ne contient pas 'LIXEEBOX_IP'.\n"
+                "Veuillez ajouter cette valeur et redémarrer l'application."
+            )
+            Gtk.main_quit()
+            return
 
         self.indicator = appindicator.Indicator.new(
             APP_NAME, "", appindicator.IndicatorCategory.APPLICATION_STATUS
@@ -42,7 +50,7 @@ class LixeeLinkyIndicator:
         self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
 
         # Set the solar icon
-        self.indicator.set_icon_full(ICON_PATH, APP_NAME)
+        self.indicator.set_icon_full(ICON_PATH_DEFAULT, APP_NAME)
         # No initial label - will be set on first update
         self.indicator.set_label("... VA", TEXT_PATTERN)
 
@@ -59,7 +67,7 @@ class LixeeLinkyIndicator:
 
     def update_indicator(self):
         try:
-            response = requests.get(f"http://{ip}/getLinky")
+            response = requests.get(f"http://{self.lixeebox_ip}/getLinky")
             data = response.json()
             power_value = data["2820_1295"]
             text = f"{power_value} VA"
@@ -76,10 +84,10 @@ class LixeeLinkyIndicator:
                 self.indicator.set_icon_full(ICON_PATH_YELLOW, APP_NAME)
 
         except Exception as e:
-            print(f"Erreur: {e}")
+            #print(f"Erreur: {e}")
             self.indicator.set_label("ERR", TEXT_PATTERN)
             self.indicator.set_icon_full(
-                ICON_PATH, APP_NAME
+                ICON_PATH_DEFAULT, APP_NAME
             )  # Reset to default on error
         return True
 
@@ -123,11 +131,15 @@ class LixeeLinkyIndicator:
                     else:
                         print(f"Warning: REFRESH_SECONDS value {new_value} out of range (1-1800)")
                 elif key == "LOW_THRESHOLD":
-                    self.low_threshold = int(value_str)
+                    #self.low_threshold = int(value_str)
                     config_changed = True
                 elif key == "HIGH_THRESHOLD":
                     self.high_threshold = int(value_str)
-                    config_changed = True
+                    #config_changed = True
+                elif key == "LIXEEBOX_IP":
+                    self.lixeebox_ip = value_str
+                    #config_changed = True
+
             except ValueError:
                 print(f"Error: Invalid integer value for {key}: {value_str}")
         
@@ -153,6 +165,17 @@ class LixeeLinkyIndicator:
     def quit(self, widget):
         Gtk.main_quit()
 
+    def popupWarning(self, title, message):
+        dialog = Gtk.MessageDialog(
+            None,
+            Gtk.DialogFlags.MODAL,
+            Gtk.MessageType.WARNING,
+            Gtk.ButtonsType.CLOSE,
+            title
+        )
+        dialog.format_secondary_text(message)
+        dialog.run()
+        dialog.destroy()
 
 if __name__ == "__main__":
     print("Lixee-linky-indicator starting!")

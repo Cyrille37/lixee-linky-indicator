@@ -7,3 +7,5 @@ REFRESH_SECONDS=5
 # Power thresholds for icon colors (in VA)
 LOW_THRESHOLD=-100
 HIGH_THRESHOLD=1
+
+LIXEEBOX_IP=192.168.1.183

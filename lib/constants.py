@@ -1,6 +1,6 @@
 import os
 
-APP_NAME = "indicator-lixee-linky"
+APP_NAME = "lixee-linky-indicator"
 APP_VERSION = "0.1"
 APP_FOLDER = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 

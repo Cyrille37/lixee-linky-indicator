@@ -131,8 +131,8 @@ class LixeeLinkyIndicator:
                     else:
                         print(f"Warning: REFRESH_SECONDS value {new_value} out of range (1-1800)")
                 elif key == "LOW_THRESHOLD":
-                    #self.low_threshold = int(value_str)
-                    config_changed = True
+                    self.low_threshold = int(value_str)
+                    #config_changed = True
                 elif key == "HIGH_THRESHOLD":
                     self.high_threshold = int(value_str)
                     #config_changed = True

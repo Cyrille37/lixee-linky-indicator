@@ -2,6 +2,8 @@
 
 Un indicateur pour la barre de tâche du bureau Linux qui affiche la consommation électrique en temps réel depuis un compteur Linky via une **[LiXee Box](https://lixee.fr/fr/)**.
 
+![Copie d’écran](./screenshot.png)
+
 ## Fonctionnalités
 
 - Affichage de la puissance apparente instantanée (VA) dans la barre de tâche

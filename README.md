@@ -102,3 +102,5 @@ Ce projet est distribué selon les termes de la **WTFPL** — voir le fichier [L
 
 - Développé par [Cyrille37](https://github.com/Cyrille37)
 - Icônes : [FontAwesome](https://fontawesome.com/) (Solar Panel)
+- [LiXee-Box API](https://github.com/fairecasoimeme/LiXee-Box)
+

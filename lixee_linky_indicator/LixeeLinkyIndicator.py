@@ -93,16 +93,16 @@ class LixeeLinkyIndicator:
     def on_config_changed(self, filemonitor, file, other_file, event_type):
         if event_type != Gio.FileMonitorEvent.CHANGES_DONE_HINT:
             return
-        print("Config changed!")
+        #print("Config changed!")
         self.read_config(file.get_path())
 
     def read_config(self, config_file):
-        print("Reading config...")
+        #print("Reading config...")
         try:
             with open(config_file, 'r', encoding='utf-8') as f:
                 config = f.readlines()
         except IOError as e:
-            print(f"Error reading config file: {e}")
+            #print(f"Error reading config file: {e}")
             config = []
 
         line_pattern = re.compile(r"^([A-Za-z_]+)=(.*)$")
@@ -114,12 +114,12 @@ class LixeeLinkyIndicator:
                 continue
             result = line_pattern.search(line)
             if not result or result.group(2) is None:
-                print("ERROR:", f"Configuration unknown line format for: {line}")
+                #print("ERROR:", f"Configuration unknown line format for: {line}")
                 continue
 
             key = result.group(1).upper()
             value_str = result.group(2).strip()
-            print(f"{result.group(1)} = {value_str}")
+            #print(f"{result.group(1)} = {value_str}")
 
             try:
                 if key == "REFRESH_SECONDS":
@@ -128,7 +128,7 @@ class LixeeLinkyIndicator:
                         self.refresh_seconds = new_value
                         config_changed = True
                     else:
-                        print(f"Warning: REFRESH_SECONDS value {new_value} out of range (1-1800)")
+                        #print(f"Warning: REFRESH_SECONDS value {new_value} out of range (1-1800)")
                 elif key == "LOW_THRESHOLD":
                     self.low_threshold = int(value_str)
                 elif key == "HIGH_THRESHOLD":
@@ -137,7 +137,7 @@ class LixeeLinkyIndicator:
                     self.lixeebox_ip = value_str
 
             except ValueError:
-                print(f"Error: Invalid integer value for {key}: {value_str}")
+                #print(f"Error: Invalid integer value for {key}: {value_str}")
 
         if config_changed:
             GLib.idle_add(self.restart_timeout)
@@ -149,7 +149,7 @@ class LixeeLinkyIndicator:
         self.timeout_source = GLib.timeout_add_seconds(
             effective_interval, self.update_indicator
         )
-        print(f"Timeout restarted with {effective_interval} second interval")
+        #print(f"Timeout restarted with {effective_interval} second interval")
         return False
 
     def quit(self, widget):

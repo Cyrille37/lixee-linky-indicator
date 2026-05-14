@@ -10,13 +10,13 @@ from lixee_linky_indicator.LixeeLinkyIndicator import LixeeLinkyIndicator
 
 
 def main():
-    print(f"{APP_NAME} {APP_VERSION} starting!")
+    #print(f"{APP_NAME} {APP_VERSION} starting!")
 
     configfile = os.path.join(os.getenv("HOME"), CONFIG_FILENAME)
     indicator = LixeeLinkyIndicator(configfile)
 
     if os.path.exists(configfile):
-        print(f"Monitoring configuration file: {configfile}")
+        #print(f"Monitoring configuration file: {configfile}")
         file = Gio.File.new_for_path(configfile)
         monitor = file.monitor_file(Gio.FileMonitorFlags.NONE, None)
         monitor.connect("changed", indicator.on_config_changed)

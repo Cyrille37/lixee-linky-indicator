@@ -1,7 +1,7 @@
 # Lixee Linky Indicator Configuration
 # Format: KEY=value
 
-# 📢 Mandatory parameter: the IP addr of you LiXee-Box
+# Mandatory parameter: the IP addr of your LiXee-Box
 LIXEEBOX_IP=
 
 # Refresh interval in seconds (1-1800)
@@ -10,4 +10,3 @@ REFRESH_SECONDS=5
 # Power thresholds for icon colors (in VA)
 LOW_THRESHOLD=-100
 HIGH_THRESHOLD=1
-

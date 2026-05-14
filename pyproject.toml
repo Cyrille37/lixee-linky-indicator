@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lixee-linky-indicator"
+version = "0.1"
+description = "Indicateur de consommation Linky pour la barre des tâches Linux"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests",
+]
+license = "WTFPL"
+authors = [
+    {name = "Cyrille37", email = "Cyrille37@gmail.com"},
+]
+
+[project.scripts]
+lixee-linky-indicator = "lixee_linky_indicator.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["lixee_linky_indicator*"]
+
+[tool.setuptools.package-data]
+lixee_linky_indicator = ["assets/*.svg"]

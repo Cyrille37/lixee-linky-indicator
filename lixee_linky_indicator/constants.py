@@ -1,0 +1,9 @@
+import os
+
+APP_NAME = "lixee-linky-indicator"
+APP_VERSION = "0.1"
+CONFIG_FILENAME = f".{APP_NAME}"
+
+REFRESH_SECONDS = 5
+LOW_THRESHOLD = -100
+HIGH_THRESHOLD = 1

@@ -128,7 +128,7 @@ class LixeeLinkyIndicator:
                         self.refresh_seconds = new_value
                         config_changed = True
                     else:
-                        #print(f"Warning: REFRESH_SECONDS value {new_value} out of range (1-1800)")
+                        print(f"Warning: REFRESH_SECONDS value {new_value} out of range (1-1800)")
                 elif key == "LOW_THRESHOLD":
                     self.low_threshold = int(value_str)
                 elif key == "HIGH_THRESHOLD":
@@ -137,7 +137,7 @@ class LixeeLinkyIndicator:
                     self.lixeebox_ip = value_str
 
             except ValueError:
-                #print(f"Error: Invalid integer value for {key}: {value_str}")
+                print(f"Error: Invalid integer value for {key}: {value_str}")
 
         if config_changed:
             GLib.idle_add(self.restart_timeout)

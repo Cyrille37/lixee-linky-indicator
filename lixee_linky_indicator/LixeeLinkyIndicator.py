@@ -28,9 +28,9 @@ def _get_assets_path():
 
 ASSETS_PATH = _get_assets_path()
 ICON_PATH_DEFAULT = os.path.join(ASSETS_PATH, "solar-panel.svg")
-ICON_PATH_GREEN = os.path.join(ASSETS_PATH, "solar-panel-green.svg")
-ICON_PATH_YELLOW = os.path.join(ASSETS_PATH, "solar-panel-yellow.svg")
-ICON_PATH_RED = os.path.join(ASSETS_PATH, "solar-panel-red.svg")
+ICON_PATH_LOW = os.path.join(ASSETS_PATH, "solar-panel-low.svg")
+ICON_PATH_MIDDLE = os.path.join(ASSETS_PATH, "solar-panel-middle.svg")
+ICON_PATH_HIGH = os.path.join(ASSETS_PATH, "solar-panel-high.svg")
 TEXT_PATTERN = "8888 VA"
 
 
@@ -79,11 +79,11 @@ class LixeeLinkyIndicator:
             self.indicator.set_label(text, TEXT_PATTERN)
 
             if power_value < self.low_threshold:
-                self.indicator.set_icon_full(ICON_PATH_GREEN, APP_NAME)
+                self.indicator.set_icon_full(ICON_PATH_LOW, APP_NAME)
             elif power_value > self.high_threshold:
-                self.indicator.set_icon_full(ICON_PATH_RED, APP_NAME)
+                self.indicator.set_icon_full(ICON_PATH_HIGH, APP_NAME)
             else:
-                self.indicator.set_icon_full(ICON_PATH_YELLOW, APP_NAME)
+                self.indicator.set_icon_full(ICON_PATH_MIDDLE, APP_NAME)
 
         except Exception as e:
             self.indicator.set_label("ERR", TEXT_PATTERN)

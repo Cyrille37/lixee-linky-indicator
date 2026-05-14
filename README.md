@@ -7,7 +7,7 @@ Un indicateur pour la barre de tâche du bureau Linux qui affiche la consommatio
 - Affichage de la puissance apparente instantanée (VA) dans la barre de tâche
 - Icône colorée selon les seuils de consommation :
   - 🟢 **Verte** — injection sur le réseau (production solaire)
-  - 🟡 **Jaune** — consommation modérée
+  - 🔵 **Bleu** — consommation modérée
   - 🔴 **Rouge** — forte consommation
 - Rechargement à chaud de la configuration
 - Compatible GNOME, KDE, XFCE, budgie, etc. (tout bureau supportant AppIndicator)

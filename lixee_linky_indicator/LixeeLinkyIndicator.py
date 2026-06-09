@@ -14,7 +14,7 @@ except ImportError:
 from gi.repository import Gtk, GLib, Gio
 
 from lixee_linky_indicator.constants import (
-    APP_NAME, APP_VERSION, REFRESH_SECONDS, LOW_THRESHOLD, HIGH_THRESHOLD
+    APP_NAME, APP_VERSION, REFRESH_SECONDS, REQUEST_TIMEOUT, LOW_THRESHOLD, HIGH_THRESHOLD
 )
 
 
@@ -32,7 +32,6 @@ ICON_PATH_LOW = os.path.join(ASSETS_PATH, "solar-panel-low.svg")
 ICON_PATH_MIDDLE = os.path.join(ASSETS_PATH, "solar-panel-middle.svg")
 ICON_PATH_HIGH = os.path.join(ASSETS_PATH, "solar-panel-high.svg")
 TEXT_PATTERN = "8888 VA"
-
 
 class LixeeLinkyIndicator:
     def __init__(self, configfile):
@@ -71,7 +70,7 @@ class LixeeLinkyIndicator:
 
     def update_indicator(self):
         try:
-            response = requests.get(f"http://{self.lixeebox_ip}/getLinky")
+            response = requests.get(f"http://{self.lixeebox_ip}/getLinky", timeout=REQUEST_TIMEOUT)
             data = response.json()
             power_value = data["2820_1295"]
             text = f"{power_value} VA"

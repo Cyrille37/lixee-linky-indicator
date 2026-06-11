@@ -18,9 +18,13 @@ Un indicateur pour la barre de tâche du bureau Linux qui affiche la consommatio
 
 ### Paquets système
 
+It uses `AyatanaAppIndicator3` or fallback to `AppIndicator3`.
+
 ```bash
 # Debian / Ubuntu / Linux Mint
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-appindicator3-0.1 python3-requests
+`sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-ayatanaappindicator3-0.1 python3-requests`
+OR
+`sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-appindicator3-0.1 python3-requests`
 
 # Fedora
 sudo dnf install python3-gobject gtk3 libappindicator-gtk3 python3-requests
